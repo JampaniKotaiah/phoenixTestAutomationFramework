@@ -1,24 +1,23 @@
 package com.api.tests;
 
-import static io.restassured.RestAssured.*;
-
-import static org.hamcrest.Matchers.*;
-
+import static com.api.utils.ConfigManager.getProperty;
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.lessThan;
+import java.io.IOException;
 import org.testng.annotations.Test;
-
 import com.api.pojo.UserDetailsPojo;
-
 import io.restassured.http.ContentType;
 import io.restassured.module.jsv.JsonSchemaValidator;
 
 public class LoginAPITest {
 	
 	@Test
-	public void loginAPITest() {
-
+	public void loginAPITest() throws IOException {
+		
 		UserDetailsPojo userPojo = new UserDetailsPojo("iamfd","password");
 		given()
-			.baseUri("http://64.227.160.186:9000/V1")
+			.baseUri(getProperty("BASE_URI"))
 			.and()
 			.contentType(ContentType.JSON)
 			.and()
