@@ -12,7 +12,7 @@ import java.util.Properties;
 public class ConfigManager {
 	
 	private static Properties prop = new Properties();//create object of the properties class
-	private static String path = "config\\config.properties";
+	private static String path = "config/config.properties";
 	private static String env;
 	private ConfigManager() {
 	
@@ -23,13 +23,13 @@ public class ConfigManager {
 		env = System.getProperty("env","qa");
 		env = env.toLowerCase().trim();
 		switch(env) {
-		case "dev" -> path = "config\\config.dev.properties";
+		case "dev" -> path = "config/config.dev.properties";
 
-		case "qa" -> path = "config\\config.qa.properties";
+		case "qa" -> path = "config/config.qa.properties";
 			
-		case "uat" -> path =  "config\\config.uat.properties";
+		case "uat" -> path =  "config/config.uat.properties";
 
-		default -> path = "config\\config.qa.properties";
+		default -> path = "config/config.qa.properties";
 		
 		}
 		
