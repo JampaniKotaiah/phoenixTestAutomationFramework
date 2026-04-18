@@ -20,14 +20,14 @@ on:
        suiteXmlFile:
         description: "Testng Xml File"
         type: choice
-        options: [qa,dev,uat]
-        default: qa
+        options: [testng.xml,smoke.xml,regression.xml]
+        default: testng.xml
         required: true
        env:
         description: "Environment"
         type: choice
-        options: [testng.xml,smoke.xml,regression.xml]
-        default: testng.xml
+        options: [qa,uat,dev]
+        default: qa
         required: true    
 
 jobs:
