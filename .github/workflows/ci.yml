@@ -28,8 +28,9 @@ on:
         type: choice
         options: [qa,uat,dev]
         default: qa
-        required: true    
+        required: true
 
+        
 jobs:
   test:
 
