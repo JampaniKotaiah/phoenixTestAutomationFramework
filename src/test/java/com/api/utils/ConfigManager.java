@@ -10,7 +10,7 @@ import java.util.Properties;
 
 
 public class ConfigManager {
-	
+	//PluxeeComplientNumber: 7247619
 	private static Properties prop = new Properties();//create object of the properties class
 	private static String path = "config/config.properties";
 	private static String env;

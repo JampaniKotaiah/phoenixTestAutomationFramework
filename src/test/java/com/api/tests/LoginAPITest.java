@@ -7,6 +7,8 @@ import static org.hamcrest.Matchers.lessThan;
 import java.io.IOException;
 import org.testng.annotations.Test;
 import com.api.pojo.UserDetailsPojo;
+import com.api.utils.SpecUtil;
+
 import io.restassured.http.ContentType;
 import io.restassured.module.jsv.JsonSchemaValidator;
 
@@ -17,24 +19,11 @@ public class LoginAPITest {
 		
 		UserDetailsPojo userPojo = new UserDetailsPojo("iamfd","password");
 		given()
-			.baseUri(getProperty("BASE_URI"))
-			.and()
-			.contentType(ContentType.JSON)
-			.and()
-			.accept(ContentType.JSON)
-			.and()
-			.body(userPojo)
-			.log().uri()
-			.log().method()
-			.log().headers()
-			.log().body()
+			.spec(SpecUtil.requestSpec(userPojo))
 		.when()
 			.post("login")
 		.then()
-			.log().all()
-			.statusCode(200)
-			.time(lessThan(1500L))
-			.and()
+			.spec(SpecUtil.responseSpec_OK())
 			.body("message",equalTo("Success"))
 			.and()
 			.body(JsonSchemaValidator.matchesJsonSchemaInClasspath("response-schema/LoginResponseSchema.json"));
