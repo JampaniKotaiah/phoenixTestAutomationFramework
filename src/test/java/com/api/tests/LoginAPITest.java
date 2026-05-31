@@ -5,6 +5,8 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.lessThan;
 import java.io.IOException;
+
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import com.api.pojo.UserDetailsPojo;
 import com.api.utils.SpecUtil;
@@ -14,10 +16,17 @@ import io.restassured.module.jsv.JsonSchemaValidator;
 
 public class LoginAPITest {
 	
-	@Test
-	public void loginAPITest() throws IOException {
+	private UserDetailsPojo userPojo;
+	
+	@BeforeMethod(description="create the payload for login API")
+	public void setup() {
 		
-		UserDetailsPojo userPojo = new UserDetailsPojo("iamfd","password");
+		 userPojo = new UserDetailsPojo("iamfd","password");
+	}
+	
+	@Test(description = "Verify if login API is working for FD User",groups = {"api","regression","smoke"})
+	public void loginAPITest() throws IOException {	
+		
 		given()
 			.spec(SpecUtil.requestSpec(userPojo))
 		.when()

@@ -19,7 +19,7 @@ import io.restassured.module.jsv.JsonSchemaValidator;
 
 public class UserDetailsAPITest {
 	
-	@Test
+	@Test(description = "verify user details api response is shown correctely",groups={"api","regression","smoke"})
 	public void userDetailsAPITest() throws IOException {
 		
 	//	Header authHeader =  new Header("Authorization",getToken(FD));
