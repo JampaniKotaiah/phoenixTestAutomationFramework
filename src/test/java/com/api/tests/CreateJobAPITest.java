@@ -17,6 +17,7 @@ import com.api.pojo.Customer;
 import com.api.pojo.CustomerAddress;
 import com.api.pojo.CustomerProduct;
 import com.api.pojo.Problems;
+import com.api.utils.DateTimeUtil;
 import com.api.utils.SpecUtil;
 
 import io.restassured.module.jsv.JsonSchemaValidator;
@@ -29,7 +30,7 @@ public class CreateJobAPITest {
 		String imenumber = RandomStringUtils.randomNumeric(15);
 		Customer customer = new Customer("Kotaiah", "Jampani", "8143737310","","koti.31mca@yahoo.co.in","");
 		CustomerAddress customerAddress = new CustomerAddress("D 404","karmikaNagar","yousafguda","Hyderabad", "secunderabad","500045", "India", "Telangana");
-		CustomerProduct customerProduct = new CustomerProduct("2026-05-06T18:30:00.000Z", imenumber, imenumber, imenumber, "2026-05-06T18:30:00.000Z", 1, 1);
+		CustomerProduct customerProduct = new CustomerProduct(DateTimeUtil.getTimeWithDaysAgo(10), imenumber, imenumber, imenumber, DateTimeUtil.getTimeWithDaysAgo(10), 1, 1);
 		Problems problems = new Problems(2,"mobile Hanging issue");
 		List<Problems> problemsList = new ArrayList<Problems>();
 		problemsList.add(problems);
