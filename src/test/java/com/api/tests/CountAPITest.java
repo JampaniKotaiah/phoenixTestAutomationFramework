@@ -20,7 +20,7 @@ import java.io.IOException;
 
 public class CountAPITest {
 	
-	@Test
+	@Test(description = "Verify the count API is giving correct response",groups= {"api","smoke","regression"})
 	public void verifyCountAPIResponse() throws IOException {
 		
 	//	Header authHeader =  new Header("Authorization",getToken(FD));
@@ -39,7 +39,7 @@ public class CountAPITest {
 			.body(JsonSchemaValidator.matchesJsonSchemaInClasspath("response-schema/CountAPIResponseSchema-FD.json"));
 
 	}
-	@Test
+	@Test(description = "Verify the countAPI missingAuthtoken",groups= {"api","negative","smoke","regression"})
 	public void countAPITest_MissingAuthToken() throws IOException {
 		
 		given()

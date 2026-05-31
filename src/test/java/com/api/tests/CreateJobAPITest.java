@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.hamcrest.Matchers;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.api.constant.Role;
@@ -24,9 +25,10 @@ import io.restassured.module.jsv.JsonSchemaValidator;
 
 public class CreateJobAPITest {
 	
-	@Test
-	public void createJobAPITest() throws IOException {
-
+	private CreateJobPayload createjobPayload;
+	
+	@BeforeMethod(description = "Verify create job request payload")
+	public void setup() {
 		String imenumber = RandomStringUtils.randomNumeric(15);
 		Customer customer = new Customer("Kotaiah", "Jampani", "8143737310","","koti.31mca@yahoo.co.in","");
 		CustomerAddress customerAddress = new CustomerAddress("D 404","karmikaNagar","yousafguda","Hyderabad", "secunderabad","500045", "India", "Telangana");
@@ -34,9 +36,14 @@ public class CreateJobAPITest {
 		Problems problems = new Problems(2,"mobile Hanging issue");
 		List<Problems> problemsList = new ArrayList<Problems>();
 		problemsList.add(problems);
+		createjobPayload = new CreateJobPayload(0, 2, 1, 1, customer, customerAddress, customerProduct, problemsList);
 		
-		CreateJobPayload createjobPayload = new CreateJobPayload(0, 2, 1, 1, customer, customerAddress, customerProduct, problemsList);
 		
+	}
+	
+	@Test(description = "Verify the createJobAPI is giving correct response",groups= {"api","smoke","regression"})
+	public void createJobAPITest() throws IOException {
+
 		given()
 			.spec(SpecUtil.requestSpecificationWithAuth(Role.FD,createjobPayload))
 		.when()
